@@ -13,6 +13,14 @@ class HomeController extends BaseController {
         res.redirect('/')
       }
 	}
+  
+  settings(req, res) {
+      if (req.session.tk != undefined) {
+        res.render('settings', {'layout': "settings.hbs"})
+      } else {
+        res.redirect('/')
+      }
+  }
 }
 
 export default new HomeController();

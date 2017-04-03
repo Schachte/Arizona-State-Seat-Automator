@@ -5,6 +5,7 @@ import HomeController from './controllers/home.controller';
 import AuthController from './controllers/auth.controller';
 import UsersController from './controllers/users.controller';
 import PostsController from './controllers/posts.controller';
+import RegistrationController from './controllers/registration.controller';
 
 import authenticate from './middleware/authenticate';
 import accessControl from './middleware/access-control';
@@ -12,6 +13,7 @@ import errorHandler from './middleware/error-handler';
 
 const routes = new Router();
 
+routes.get('/signup', RegistrationController.index);
 routes.get('/', MetaController.index);
 routes.get('/dashboard', HomeController.index);
 

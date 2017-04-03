@@ -14,6 +14,7 @@ class UsersController extends BaseController {
   _populate = async (req, res, next) => {
     const { username } = req.params;
 
+    console.log(req.currentUser);
     try {
       const user = await User.findOne({ username });
 

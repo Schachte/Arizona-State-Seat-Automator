@@ -4,6 +4,10 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import morgan from 'morgan';
 import helmet from 'helmet';
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var exphbs  = require('express-handlebars');
 
 import routes from './routes';
 import Constants from './config/constants';
@@ -18,6 +22,15 @@ app.use(helmet());
 // https://github.com/expressjs/cors
 app.use(cors());
 
+app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'html');
+// app.set('layout','layout');
+
+
+app.engine('.hbs', exphbs({ defaultLayout: 'dashboard', extname: '.hbs', layoutsDir: path.join(__dirname, 'views')}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', '.hbs');
+
 // Request logger
 // https://github.com/expressjs/morgan
 if (!Constants.envs.test) {
@@ -29,12 +42,16 @@ if (!Constants.envs.test) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cookieParser());
+app.use(session({secret: 'smith'}));
+
 // Lets you use HTTP verbs such as PUT or DELETE
 // https://github.com/expressjs/method-override
 app.use(methodOverride());
 
 // Mount public routes
-app.use('/public', express.static(`${__dirname}/public`));
+// app.use('/public', express.static(`${__dirname}/public`));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount API routes
 app.use(Constants.apiPrefix, routes);

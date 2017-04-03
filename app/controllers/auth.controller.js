@@ -4,22 +4,28 @@ import User from '../models/user';
 class AuthController extends BaseController {
   login = async (req, res, next) => {
     const { username, password } = req.body;
-
+    console.log(req.headers);
+    
     try {
       const user = await User.findOne({ username });
 
       if (!user || !user.authenticate(password)) {
-        const err = new Error('Please verify your credentials.');
-        err.status = 401;
-        return next(err);
-      }
+        return res.redirect("/")
 
-      const token = user.generateToken();
-      return res.status(200).json({ token });
+      }
+      req.session.tk = user.generateToken();;
+      return res.redirect("/dashboard")
+
     } catch (err) {
       next(err);
     }
   }
+  
+  logout = (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
+  }
+  
 }
 
 export default new AuthController();

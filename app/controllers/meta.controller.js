@@ -1,11 +1,21 @@
 import BaseController from './base.controller';
 import Constants from '../config/constants';
 
+let express = require("express");
+let router = express.Router();
+
+
 class MetaController extends BaseController {
   index(req, res) {
-		res.json({
-			version: Constants.version,
-		});
+
+    //IF the user isn't authenticated
+    if (req.session.tk==undefined){
+      res.render('login', {layout: "login.hbs"})
+    } else{
+      
+      //Log user into dashboard
+      res.render('layouts/dashboard', {})
+    }
 	}
 }
 

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import MetaController from './controllers/meta.controller';
+import HomeController from './controllers/home.controller';
 import AuthController from './controllers/auth.controller';
 import UsersController from './controllers/users.controller';
 import PostsController from './controllers/posts.controller';
@@ -12,9 +13,11 @@ import errorHandler from './middleware/error-handler';
 const routes = new Router();
 
 routes.get('/', MetaController.index);
+routes.get('/dashboard', HomeController.index);
 
 // Authentication
 routes.post('/auth/login', AuthController.login);
+routes.get('/auth/logout', AuthController.logout);
 
 // Users
 routes.get('/users', UsersController.search);

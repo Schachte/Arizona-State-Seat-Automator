@@ -1,5 +1,6 @@
 import path from 'path';
 import merge from 'lodash/merge';
+var mysql      = require('mysql');
 
 // Default configuations applied to all environments
 const defaultConfig = {
@@ -42,6 +43,7 @@ const defaultConfig = {
 };
 
 // Environment specific overrides
+// TODO: Get rid of mongo stuff
 const environmentConfigs = {
   development: {
     mongo: {
@@ -68,5 +70,14 @@ const environmentConfigs = {
   },
 };
 
+const sqlConfig = {
+  connections: mysql.createConnection({
+                  host     : process.env.DB_HOST,
+                  user     : process.env.DB_USER,
+                  password : process.env.DB_PASSWORD,
+                  database : process.env.DB_DATABASE
+                }),
+}
+
 // Recursively merge configurations
-export default merge(defaultConfig, environmentConfigs[process.env.NODE_ENV] || {});
+export default merge(defaultConfig, environmentConfigs[process.env.NODE_ENV], sqlConfig || {});

@@ -6,6 +6,8 @@ import AuthController from './controllers/auth.controller';
 import UsersController from './controllers/users.controller';
 import ClassController from './controllers/class.controller';
 
+import ClassAPI from './api/classes.api';
+
 import authenticate from './middleware/authenticate';
 import accessControl from './middleware/access-control';
 import errorHandler from './middleware/error-handler';
@@ -31,6 +33,7 @@ routes.get('/users/:username', UsersController._populate, UsersController.fetch)
 // Classes
 routes.get('/class/:classNumber', ClassController.getClassName);
 
+routes.get('/classes/', ClassAPI.getClasses);
 
 // Admin
 routes.get('/admin', accessControl('admin'), MetaController.index);

@@ -1,5 +1,6 @@
 import BaseController from './base.controller';
 import User from '../models/user';
+import Logger from '../lib/logger';
 
 class UsersController extends BaseController {
 

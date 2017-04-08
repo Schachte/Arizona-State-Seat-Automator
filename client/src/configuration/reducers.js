@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux-immutable';
 import { reducer as form } from 'redux-form/immutable';
 
-import equipment from '../Equipment';
+import dashboard from '../Dashboard';
 import auth from '../auth';
 
 const rootReducer = combineReducers({
   form,
-  equipment,
+  dashboard,
   auth
 });
 

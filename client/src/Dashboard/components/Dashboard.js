@@ -1,5 +1,5 @@
 import React from 'react';
-const Dashboard = () => (
+const Dashboard = (props) => (
   <div className="row">
     <div className="content-box-large box-with-header">
       <div className="content-box-large">
@@ -18,20 +18,15 @@ const Dashboard = () => (
               </tr>
             </thead>
             <tbody>
-              <tr className="odd">
-                <td>Artificial Intelligence</td>
-                <td>102392</td>
-                <td>Heni Ben Amor</td>
-                <td className="center">0/200</td>
-                <td className="center" style={{ backgroundColor: '#e74c3c' }}>Unavailable</td>
-              </tr>
-              <tr className="even">
-                <td>Statistical Machine Learning</td>
-                <td>23425</td>
-                <td>Jingrui He</td>
-                <td className="center">5/200</td>
-                <td className="center" style={{ backgroundColor: '#27ae60' }}>Available</td>
-              </tr>
+              {props.classes.map((c) => (
+                <tr key={c.get('class_name')}>
+                  <td>{c.get('class_name')}</td>
+                  <td>{c.get('class_number')}</td>
+                  <td className="center">{c.get('professor')}</td>
+                  <td className="center">{c.get('available_seats')}/{c.get('total_seats')}</td>
+                  <td>{c.get('available_seats') > 0 ? 'Available' : 'Unavailable'}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

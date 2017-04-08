@@ -7,9 +7,8 @@ import helmet from 'helmet';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import exphbs from 'express-handlebars';
 import Logger from './lib/logger';
-require('dotenv').config()
+require('dotenv').config();
 
 import routes from './routes';
 import Constants from './config/constants';
@@ -23,14 +22,9 @@ app.use(helmet());
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 
-// TODO: Switch over to react...
-app.engine('.hbs', exphbs({ defaultLayout: 'dashboard', extname: '.hbs', layoutsDir: path.join(__dirname, 'views')}));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '.hbs');
-
 // Request logger (TURNED OFF TEMPORARILY)
 // if (!Constants.envs.test) {
-  // app.use(morgan('dev'));
+// app.use(morgan('dev'));
 // }
 
 // Parse incoming request bodies
@@ -38,7 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(session({secret: 'smith'}));
+app.use(session({ secret: 'smith' }));
 
 // Lets you use HTTP verbs such as PUT or DELETE
 app.use(methodOverride());
@@ -50,10 +44,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(Constants.apiPrefix, routes);
 
 // Database Connection Verification
-Constants.connections.connect(function(err) {
-  if (err) { Logger.error('Error connecting to database!'); return;}
-  Logger.debug(`Connected to database @ ${process.env.DB_HOST}!`);
-});
+// Constants.connections.connect(function (err) {
+//   if (err) {
+//     Logger.error('Error connecting to database!'); return;
+//   }
+//   Logger.debug(`Connected to database @ ${process.env.DB_HOST}!`);
+// });
 
 app.listen(Constants.port, () => {
   Logger.debug(`

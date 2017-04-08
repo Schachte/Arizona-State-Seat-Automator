@@ -1,7 +1,11 @@
-**/.DS_STORE
-npm-debug.log
-.imdone
-build
-coverage
-node_modules
-.env
+# Client
+client/build
+
+# Server
+server/**/.DS_STORE
+server/npm-debug.log
+server/.imdone
+server/build
+server/coverage
+server/node_modules
+server/.env

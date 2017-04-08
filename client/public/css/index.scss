@@ -1,0 +1,16 @@
+.header a {
+  color: white;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+a:focus{
+  color: white;
+  border: none;
+}
+
+// In order to get the Add Class forms label looking good on big screens.
+@media (min-width: 992px) {
+  .col-md-2 {
+    width: unset !important; } }

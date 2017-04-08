@@ -30,12 +30,12 @@ class AddClass extends Component {
                   <label><b>Class Number:&nbsp;</b></label>
                 </div>
                 <div className="col-md-10">
-                  <Field name="className" component={renderInlineNumberInput} placeholder="Enter Class Number" />
-                  <br />
-                  <Field name="reserved" component="input" type="checkbox"/>
-                  <label>&nbsp;Reserved</label>
-                  <br />
-                  <button type="submit" className="btn btn-primary">Add Class</button>
+                  <Field name="classNumber" component={renderInlineNumberInput} placeholder="Enter Class Number" />
+                    <br />
+                    <Field name="reserved" component="input" type="checkbox"/>
+                    <label>&nbsp;Reserved</label>
+                    <br />
+                    <button type="submit" className="btn btn-primary">Add Class</button>
                 </div>
               </Form>
             </div>

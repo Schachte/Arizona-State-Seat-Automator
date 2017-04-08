@@ -4,6 +4,7 @@ import MetaController from './controllers/meta.controller';
 import HomeController from './controllers/home.controller';
 import AuthController from './controllers/auth.controller';
 import UsersController from './controllers/users.controller';
+import RegistrationController from './controllers/registration.controller';
 import ClassController from './controllers/class.controller';
 
 import ClassAPI from './api/classes.api';
@@ -14,6 +15,7 @@ import errorHandler from './middleware/error-handler';
 
 const routes = new Router();
 
+routes.get('/signup', RegistrationController.index);
 routes.get('/', MetaController.index);
 routes.get('/dashboard', HomeController.index);
 routes.get('/settings', HomeController.settings);

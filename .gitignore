@@ -1,5 +1,9 @@
+.env
+
 # Client
 client/build
+client/node_modules
+client/.env
 
 # Server
 server/**/.DS_STORE

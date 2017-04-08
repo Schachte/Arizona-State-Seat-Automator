@@ -44,12 +44,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(Constants.apiPrefix, routes);
 
 // Database Connection Verification
-// Constants.connections.connect(function (err) {
-//   if (err) {
-//     Logger.error('Error connecting to database!'); return;
-//   }
-//   Logger.debug(`Connected to database @ ${process.env.DB_HOST}!`);
-// });
+Constants.connections.connect(function (err) {
+  if (err) {
+    Logger.error('Error connecting to database!' + err); return;
+  }
+  Logger.debug(`Connected to database @ ${process.env.DB_HOST}!`);
+});
 
 app.listen(Constants.port, () => {
   Logger.debug(`

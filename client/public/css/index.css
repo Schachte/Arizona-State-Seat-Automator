@@ -1,0 +1,12 @@
+.header a {
+  color: white; }
+  .header a:hover {
+    text-decoration: none; }
+
+a:focus {
+  color: white;
+  border: none; }
+
+@media (min-width: 992px) {
+  .col-md-2 {
+    width: unset !important; } }

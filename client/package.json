@@ -1,0 +1,35 @@
+{
+  "name": "OpenSeat",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.0",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "immutable": "^3.8.1",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.30.8",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router-dom": "^4.0.0",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.0.1",
+    "redux-form": "^6.6.1",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.5.2",
+    "npm-run-all": "^4.0.2",
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "build-css": "node-sass public/ -o public/",
+    "watch-css": "npm run build-css && node-sass public/ -o public/ --watch --recursive",
+    "start-js": "PORT=3001 react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

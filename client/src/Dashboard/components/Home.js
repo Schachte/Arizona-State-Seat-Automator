@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { NavLink, Route } from 'react-router-dom';
+import {fetchClassesRequest} from '..';
 
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard'
-import AddClass from './AddClass';
+import AddClass from '../containers/AddClassContainer';
 
 const Sidebar = () => {
   return (
@@ -18,30 +19,41 @@ const Sidebar = () => {
   )
 };
 
-const Home = (props) => (
-  <div className="row">
+class Home extends Component {
+  
+  componentWillMount(){
+    console.log("Mounted");
+    this.props.fetchClasses()
+    console.log("Props: ", this.props);
+  }
+  
+  render(){
+    return (
+      <div className="row">
 
-    <div className="col-md-2">
-      <Sidebar />
-    </div>
+        <div className="col-md-2">
+          <Sidebar />
+        </div>
 
-    <div className="col-md-10">
-      <Route exact path="/" component={Dashboard} />
-      <Route path="/add" component={AddClass} />
+        <div className="col-md-10">
+          <Route exact path="/" render={() => <Dashboard classes={this.props.classes}/>} />
+          <Route path="/add" component={AddClass} />
 
-    </div>
-  </div>
-)
+        </div>
+      </div>
+    );
+}
+}
 
 function mapStateToProps(state) {
   return {
-    // equipment: state.getIn(['equipment', 'equipment'])
+    classes: state.getIn(['dashboard', 'classes'])
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    // login: () => dispatch(login())
+    fetchClasses: () => dispatch(fetchClassesRequest()),
   }
 }
 

@@ -27,10 +27,13 @@ export const renderInlineNumberInput = ({ input, label, type, style, meta: { tou
           onChange={(e) => {
             //eslint-disable-next-line
             let val = parseInt(e.target.value);
+
+            //eslint-disable-next-line
             {/*If the value is a number and <= 5 digits, allow it. */ }
             if (!isNaN(val) && e.target.value.toString().length <= 5) {
               input.onChange(val);
 
+              //eslint-disable-next-line
               {/* Allow the form to be completely empmtied.*/ }
             } else if (e.target.value === '') {
               input.onChange(e.target.value)

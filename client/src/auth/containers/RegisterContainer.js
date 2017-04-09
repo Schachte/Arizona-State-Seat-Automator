@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Register from '../components/Register';
-import { register } from '../index';
+import { registerRequest } from '../index';
 
 function mapStateToProps(state) {
   return {
@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    register: () => dispatch(register())
+    register: (values) => dispatch(registerRequest(values))
   }
 }
 

@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 import { createAction } from 'redux-actions';
 import axios from 'axios';
 
-const API_URL = `http://localhost:4567/api/v1`;
+const API_URL = process.env.REACT_APP_API_URL;
 
 const INITIAL_STATE = Immutable.fromJS({
   classes: [
@@ -25,7 +25,7 @@ export default function (state = INITIAL_STATE, action) {
       console.log(action.payload);
       return state.set('currentClassName', Immutable.fromJS(action.payload));
     case ADD_CLASS:
-      return 
+      return
     default:
       return state;
   }
@@ -35,12 +35,13 @@ export const fetchClasses = createAction(FETCH_CLASSES);
 export const addClass = createAction(ADD_CLASS);
 export const fetchClassName = createAction(FETCH_CLASS_NAME);
 
-export function addClassRequest(c, cName){
-  
+export function addClassRequest(c, cName) {
+
   console.log(`CName: ${cName}`);
   // Build Class Object
-  let req = {classNumber: parseInt(c.classNumber), reservedStatus: c.reserved, email: 'code@asu.edu', className: cName}
-  
+  // eslint-disable-next-line
+  let req = { classNumber: parseInt(c.classNumber), reservedStatus: c.reserved, email: 'code@asu.edu', className: cName }
+
   console.log(req);
   return (dispatch) => {
     return axios.post(`${API_URL}/classes/`, req)
@@ -55,7 +56,7 @@ export function addClassRequest(c, cName){
 }
 
 export function fetchClassesRequest() {
-  
+
   return (dispatch) => {
     return axios.get(`${API_URL}/classes/`)
       .then((response) => {

@@ -45,3 +45,27 @@ export const renderInlineNumberInput = ({ input, label, type, style, meta: { tou
     </FormGroup>
   )
 }
+
+export const renderDropdown = ({ input, options, label, meta: { touched, error } }) => {
+  let errorStatus = (error && touched) ? 'error' : null;
+
+
+  // Options should be grey if the default is selected.
+  let style = {};
+  if (input.value === "") {
+    style = { color: '#99999C' };
+  }
+
+  return (
+    <FormGroup validationState={errorStatus}>
+      <label htmlFor={label} className="profile-input">{label}</label>
+      <select {...input} id={label} className="form-control" style={style}>
+        <option disabled value=''>{label}</option>
+        {options.map((option) => {
+          return <option key={option.label} value={option.value}>{option.label}</option>;
+        })}
+      </select>
+      <HelpBlock>{touched && error}</HelpBlock>
+    </FormGroup>
+  );
+}

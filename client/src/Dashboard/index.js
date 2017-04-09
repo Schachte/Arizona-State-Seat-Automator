@@ -17,7 +17,8 @@ export const ADD_CLASS = 'src/Dashboard/ADD_CLASS';
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_CLASSES:
-      return state.set('classes', action.payload);
+      console.log(action.payload);
+      return state.set('classes', Immutable.fromJS(action.payload));
     case ADD_CLASS:
       return state;
     default:
@@ -52,8 +53,8 @@ export function fetchClassesRequest() {
   return (dispatch) => {
     return axios.get(`${API_URL}/classes/`)
       .then((response) => {
-        console.log("Response: ", response);
-        dispatch(fetchClasses(response.data.classes))
+        console.log("Response: ", response.data);
+        dispatch(fetchClasses(response.data))
       })
       .catch((err) => {
         console.log(err);

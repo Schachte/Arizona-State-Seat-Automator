@@ -7,6 +7,9 @@ let router = express.Router();
 
 class ClassAPI extends BaseController {
   
+  /**
+   * Adds the class to the currently selected user within the system
+   */
   addClass(req, res) {
     
     Logger.debug(JSON.stringify(req.body))
@@ -27,16 +30,23 @@ class ClassAPI extends BaseController {
     })
   }
   
+  /**
+   * Gets all the currently associated classes for a particular user within the system
+   */
   getClasses(req, res) {
     
     //Check if a user is authenticated
     // TODO: Check auth information
   
+    //This hardcoded user should not exist within the system
     let hardcodedUser = "code@asu.edu"
     
-    Constants.connections.query(`Select * from students WHERE email="${hardcodedUser}"`, (error,results,fields) => {
+    Constants.connections.query(`SELECT classes.professor, classes.class_number, classes.total_seats, classes.available_seats, classes.class_name 
+      FROM classes
+      left join studentClasses on studentClasses.class_number=classes.class_number
+      WHERE studentClasses.email="${hardcodedUser}";`, (error,results,fields) => {
       if (error) {Logger.error('SQL Error' + error); return error}
-      else {Logger.debug(results); res.json({"Classes": results})}
+      else {Logger.debug(results); res.json(results)}
     })
 	}
 }

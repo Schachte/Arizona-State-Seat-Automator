@@ -24,7 +24,7 @@ const Dashboard = (props) => (
                   <td>{c.get('class_number')}</td>
                   <td className="center">{c.get('professor')}</td>
                   <td className="center">{c.get('available_seats')}/{c.get('total_seats')}</td>
-                  <td>{c.get('available_seats') > 0 ? 'Available' : 'Unavailable'}</td>
+                  <td style={{backgroundColor: c.get('available_seats') > 0 ? 'green' : 'red'}}>{c.get('available_seats') > 0 ? 'Available' : 'Unavailable'}</td>
                 </tr>
               ))}
             </tbody>

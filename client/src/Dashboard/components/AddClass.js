@@ -6,7 +6,9 @@ import Immutable from 'immutable';
 
 function onSubmit(values){
   console.log(values.toJS());
+  console.log("The class number is " + values.get('classNumber'))
   this.props.addClass(values.toJS())
+  this.props.getClassName(values.get('classNumber'));
 }
 
 class AddClass extends Component {
@@ -31,11 +33,12 @@ class AddClass extends Component {
                 </div>
                 <div className="col-md-10">
                   <Field name="classNumber" component={renderInlineNumberInput} placeholder="Enter Class Number" />
-                    <br />
-                    <Field name="reserved" component="input" type="checkbox"/>
-                    <label>&nbsp;Reserved</label>
-                    <br />
-                    <button type="submit" className="btn btn-primary">Add Class</button>
+                  <br />
+                  <Field name="reserved" component="input" type="checkbox"/>
+                  <label>&nbsp;Reserved</label>
+                  <br />
+                  <button type="submit" className="btn btn-primary">Add Class</button>
+                  <span>{this.props.currentClassName}</span>
                 </div>
               </Form>
             </div>

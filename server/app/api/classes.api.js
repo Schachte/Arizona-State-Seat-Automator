@@ -41,6 +41,7 @@ class ClassAPI extends BaseController {
     //This hardcoded user should not exist within the system
     let hardcodedUser = "code@asu.edu"
     
+    //This query is responsible for retrieving only the class information giving the username of a particular authenticated user
     Constants.connections.query(`SELECT classes.professor, classes.class_number, classes.total_seats, classes.available_seats, classes.class_name 
       FROM classes
       left join studentClasses on studentClasses.class_number=classes.class_number

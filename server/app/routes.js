@@ -19,7 +19,7 @@ routes.get('/dashboard', HomeController.index);
 routes.get('/settings', HomeController.settings);
 
 //Classes
-routes.get('/class/:classNumber', ClassController.getClassName);
+routes.get('/classes/:classNumber', ClassController.runClassScrape);
 
 routes.get('/classes/', ClassAPI.getClasses);
 routes.post('/classes/', ClassAPI.addClass);

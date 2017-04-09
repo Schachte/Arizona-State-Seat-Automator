@@ -4,11 +4,12 @@ import { renderInlineNumberInput } from '../../common/ReduxFormComponents';
 import { Form } from 'react-bootstrap';
 import Immutable from 'immutable';
 
-function onSubmit(values){
+async function onSubmit(values){
   console.log(values.toJS());
   console.log("The class number is " + values.get('classNumber'))
-  this.props.addClass(values.toJS())
-  this.props.getClassName(values.get('classNumber'));
+  await this.props.getClassName(values.get('classNumber'));
+  await this.props.addClass(values.toJS(), this.props.currentClassName)
+  await console.log("done");
 }
 
 class AddClass extends Component {

@@ -15,8 +15,9 @@ class ClassAPI extends BaseController {
     Logger.debug(JSON.stringify(req.body))
   
     Logger.debug(req.body.classNumber)
+    Logger.debug("ClassNAME " + req.body.className);
     //Insert class into the classes table if it doesn't exist
-    Constants.connections.query(`INSERT INTO classes (class_number) VALUES (${req.body.classNumber})
+    Constants.connections.query(`INSERT INTO classes (class_number, class_name) VALUES (${req.body.classNumber}, "${req.body.className}")
       ON DUPLICATE KEY UPDATE class_number=class_number;`, (error,results,fields) => {
       if (error) {Logger.error('SQL Error' + error); return res.json("Class already added, try again...")}
       else {Logger.debug(results);}

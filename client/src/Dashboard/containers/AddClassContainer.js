@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addClass: (c) => dispatch(addClassRequest(c)),
+    addClass: (c, cName) => dispatch(addClassRequest(c, cName)),
     getClassName: (c) => dispatch(fetchClassNameRequest(c))
   }
 }

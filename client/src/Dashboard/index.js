@@ -23,7 +23,7 @@ export default function (state = INITIAL_STATE, action) {
       return state.set('classes', Immutable.fromJS(action.payload));
     case FETCH_CLASS_NAME:
       console.log(action.payload);
-      return state.set('currentClassName', Immutable.fromJS(action.payload + " added successfully!"));
+      return state.set('currentClassName', Immutable.fromJS(action.payload));
     case ADD_CLASS:
       return 
     default:
@@ -35,17 +35,18 @@ export const fetchClasses = createAction(FETCH_CLASSES);
 export const addClass = createAction(ADD_CLASS);
 export const fetchClassName = createAction(FETCH_CLASS_NAME);
 
-export function addClassRequest(c){
+export function addClassRequest(c, cName){
   
+  console.log(`CName: ${cName}`);
   // Build Class Object
-  let req = {classNumber: parseInt(c.classNumber), reservedStatus: c.reserved, email: 'code@asu.edu'}
+  let req = {classNumber: parseInt(c.classNumber), reservedStatus: c.reserved, email: 'code@asu.edu', className: cName}
   
   console.log(req);
   return (dispatch) => {
     return axios.post(`${API_URL}/classes/`, req)
       .then((response) => {
         console.log("Response: ", response);
-        dispatch(addClass(response.data.class))
+        dispatch(addClass(response.data.class, cName))
       })
       .catch((err) => {
         console.log(err);

@@ -37,6 +37,21 @@ function onSubmit(values) {
     })
 }
 
+const normalizePhone = (value) => {
+  if (!value) {
+    return value
+  }
+
+  const onlyNums = value.replace(/[^\d]/g, '')
+  if (onlyNums.length <= 3) {
+    return onlyNums
+  }
+  if (onlyNums.length <= 7) {
+    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`
+  }
+  return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 10)}`
+}
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +71,7 @@ class Register extends Component {
                   <Field name="email" type="email" component={renderInput} label="E-mail address" />
                   <Field name="password" type="password" component={renderInput} label="Password" />
                   <Field name="confirm_password" type="password" component={renderInput} label="Confirm Password" />
-                  <Field name="phone_number" type="tel" component={renderInput} label="Phone Number" />
+                  <Field name="phone_number" normalize={normalizePhone} type="tel" component={renderInput} label="Phone Number" />
                   <Field name="phone_carrier" type="" component={renderDropdown} label="Select Phone Carrier" options={carriers} />
                   <button className="btn btn-primary signup">Sign Up</button>
                 </form>
@@ -96,11 +111,6 @@ function validate(values) {
 
   if (!values.get('phone_number')) {
     errors.phone_number = 'Phone Number required.'
-  } else {
-    let phone_regex = /^\d{10}$/;
-    if (!values.get('phone_number').match(phone_regex)) {
-      errors.phone_number = 'Phone number does not match desired format: "1234567899"';
-    }
   }
 
   if (!values.get('phone_carrier')) {
@@ -109,6 +119,9 @@ function validate(values) {
 
   return errors;
 }
+
+
+
 
 export default reduxForm({
   form: 'register',
